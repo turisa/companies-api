@@ -10,6 +10,12 @@ const companySchema = new mongoose.Schema({
       ref: 'Job',
     },
   ],
+  managers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Manager',
+    },
+  ],
 });
 
 companySchema.set('toJSON', {
