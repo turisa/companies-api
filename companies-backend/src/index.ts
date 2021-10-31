@@ -7,15 +7,13 @@ import { clearDb, populateDb } from './utils/db_helper';
 
 dotenv.config();
 
-import faker from 'faker';
-
 const { PORT, MONGODB_URI } = process.env;
 
 const connectToDb = async () => {
   await mongoose.connect(MONGODB_URI);
 
-  clearDb();
-  populateDb();
+  await clearDb();
+  await populateDb();
 };
 
 connectToDb().then(() => {
