@@ -26,3 +26,5 @@ jobsRouter.get('/:id', async (request, response) => {
 
   response.json(job);
 });
+
+export default jobsRouter;
