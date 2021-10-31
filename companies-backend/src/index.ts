@@ -10,10 +10,18 @@ dotenv.config();
 const { PORT, MONGODB_URI } = process.env;
 
 const connectToDb = async () => {
-  await mongoose.connect(MONGODB_URI);
+  try {
+    await mongoose.connect(MONGODB_URI);
+    console.log('Connected to db');
 
-  await clearDb();
-  await populateDb();
+    console.log('Clearing db');
+    await clearDb();
+
+    console.log('Populating db');
+    await populateDb();
+  } catch (error) {
+    console.log('Failed to connect');
+  }
 };
 
 connectToDb().then(() => {
