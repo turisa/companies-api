@@ -6,7 +6,7 @@
   },
   "name": "jobs-backend",
   "version": "0.0.1",
-  "main": "./src/index.ts",
+  "main": "./dist/index.js",
   "scripts": {
     "start": "tsc && node .",
     "test": "echo \"Error: no test specified\" && exit 1"
