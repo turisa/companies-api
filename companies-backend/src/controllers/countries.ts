@@ -22,7 +22,6 @@ countriesRouter.get('/:id', async (request, response) => {
 
   const country = await Country.findById(id).populate('companies', {
     name: 1,
-    suffix: 1,
     description: 1,
   });
 

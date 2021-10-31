@@ -10,7 +10,6 @@ jobsRouter.get('/', async (request, response) => {
 
   const jobs = await Job.find(queryFilter).populate('company', {
     name: 1,
-    suffix: 1,
     description: 1,
   });
 
@@ -22,7 +21,6 @@ jobsRouter.get('/:id', async (request, response) => {
 
   const job = await Job.findById(id).populate('company', {
     name: 1,
-    suffix: 1,
     description: 1,
   });
 

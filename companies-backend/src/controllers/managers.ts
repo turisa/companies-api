@@ -10,7 +10,6 @@ managerRouter.get('/', async (request, response) => {
 
   const managers = await Manager.find(filterQuery).populate('companies', {
     name: 1,
-    suffix: 1,
     description: 1,
   });
 
@@ -22,7 +21,6 @@ managerRouter.get('/:id', async (request, response) => {
 
   const managers = await Manager.findById(id).populate('companies', {
     name: 1,
-    suffix: 1,
     description: 1,
   });
 
