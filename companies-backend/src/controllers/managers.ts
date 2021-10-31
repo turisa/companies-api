@@ -27,4 +27,4 @@ managerRouter.get('/:id', async (request, response) => {
   response.json(managers);
 });
 
-export default managerRouter;
+export default managersRouter;
