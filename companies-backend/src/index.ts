@@ -1,8 +1,23 @@
-const faker = require('faker');
-console.log(faker.name.jobTitle());
+import dotenv from 'dotenv';
+import http from 'http';
+import mongoose from 'mongoose';
 
-const jobTitle = faker.name.jobTitle();
-const validUntil = new Date();
+import app from './app';
 
-const jobDescription = `We're looking for ${jobTitle.toLowerCase()}s to help us with our new project.`;
-console.log(jobDescription);
+dotenv.config();
+
+const { PORT, MONGODB_URI } = process.env;
+
+mongoose
+  .connect(MONGODB_URI)
+  .then(() => {
+    console.log(`Connected to MongoDB`);
+  })
+  .catch(() => {
+    console.log('Failed to connect');
+  });
+
+const server = http.createServer(app);
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
