@@ -1,13 +1,14 @@
 import mongoose from 'mongoose';
 
 const managerSchema = new mongoose.Schema({
-  firstName: String,
-  lastName: String,
+  name: String,
   description: String,
-  company: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Company',
-  },
+  companies: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Company',
+    },
+  ],
 });
 
 managerSchema.set('toJSON', {
