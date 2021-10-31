@@ -2,9 +2,9 @@ import express from 'express';
 
 import Manager from '../models/manager';
 
-const managerRouter = express.Router();
+const managersRouter = express.Router();
 
-managerRouter.get('/', async (request, response) => {
+managersRouter.get('/', async (request, response) => {
   const name = request.query.name;
   const filterQuery = name ? { name: { $regex: name, $options: 'i' } } : {};
 
@@ -16,7 +16,7 @@ managerRouter.get('/', async (request, response) => {
   response.json(managers);
 });
 
-managerRouter.get('/:id', async (request, response) => {
+managersRouter.get('/:id', async (request, response) => {
   const id = request.params.id;
 
   const managers = await Manager.findById(id).populate('companies', {
