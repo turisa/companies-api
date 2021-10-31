@@ -1,6 +1,6 @@
 import express from 'express';
 
-import Company from '../models/country';
+import Company from '../models/company';
 
 const companiesRouter = express.Router();
 
