@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 
 const companySchema = new mongoose.Schema({
   name: String,
-  suffix: String,
   description: String,
   jobs: [
     {
