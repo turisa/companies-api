@@ -49,7 +49,7 @@ export const populateDb = async () => {
     const manager = new Manager(managerObject);
 
     const companyIndex = managerIndex % 100;
-    manager.company = companies[companyIndex];
+    manager.companies = manager.companies.concat(companies[companyIndex]);
 
     companies[companyIndex].managers =
       companies[companyIndex].managers.concat(manager);
