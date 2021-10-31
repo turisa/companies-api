@@ -21,4 +21,4 @@ managerSchema.set('toJSON', {
 
 const Manager = mongoose.model('Manager', managerSchema);
 
-module.exports = Manager;
+export default Manager;
