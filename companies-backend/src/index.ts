@@ -3,21 +3,24 @@ import http from 'http';
 import mongoose from 'mongoose';
 
 import app from './app';
+import { clearDb, populateDb } from './utils/db_helper';
 
 dotenv.config();
 
+import faker from 'faker';
+
 const { PORT, MONGODB_URI } = process.env;
 
-mongoose
-  .connect(MONGODB_URI)
-  .then(() => {
-    console.log(`Connected to MongoDB`);
-  })
-  .catch(() => {
-    console.log('Failed to connect');
-  });
+const connectToDb = async () => {
+  await mongoose.connect(MONGODB_URI);
 
-const server = http.createServer(app);
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  clearDb();
+  populateDb();
+};
+
+connectToDb().then(() => {
+  const server = http.createServer(app);
+  server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 });
