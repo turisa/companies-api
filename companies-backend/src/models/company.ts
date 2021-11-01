@@ -3,6 +3,10 @@ import mongoose from 'mongoose';
 const companySchema = new mongoose.Schema({
   name: String,
   description: String,
+  country: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Country',
+  },
   jobs: [
     {
       type: mongoose.Schema.Types.ObjectId,
