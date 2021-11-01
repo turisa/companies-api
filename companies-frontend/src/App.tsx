@@ -10,7 +10,6 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <h1>Companies API</h1>
       <Switch>
         <Route path="/companies">
           <Companies />
