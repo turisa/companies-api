@@ -1,6 +1,6 @@
 import Country from './Country';
 import Job from './Job';
-import Manager from './manager';
+import Manager from './Manager';
 
 export default interface Company {
   name: string;
