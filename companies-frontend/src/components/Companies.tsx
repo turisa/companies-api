@@ -12,7 +12,6 @@ const Companies = () => {
 
   return (
     <div>
-      <h2>Companies</h2>
       {companies.map((company) => (
         <p>{company.name}</p>
       ))}

@@ -11,7 +11,6 @@ const Managers = () => {
 
   return (
     <div>
-      <h2>Managers</h2>
       {managers.map((manager) => (
         <p>{manager.name}</p>
       ))}

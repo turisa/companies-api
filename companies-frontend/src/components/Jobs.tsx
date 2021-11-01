@@ -11,7 +11,6 @@ const Jobs = () => {
 
   return (
     <div>
-      <h2>Jobs</h2>
       {jobs.map((job) => (
         <p>{job.name}</p>
       ))}

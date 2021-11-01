@@ -12,7 +12,6 @@ const Countries = () => {
 
   return (
     <div>
-      <h2>Countries</h2>
       {countries.map((country) => (
         <p>{country.name}</p>
       ))}
