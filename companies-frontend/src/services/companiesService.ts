@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import Company from '../types/Company';
 
-const baseUrl = 'http://localhost:4000/companies';
+const baseUrl = 'http://localhost:4000/api/companies';
 
 const getAll = async () => {
   const response = await axios.get(baseUrl);
