@@ -23,6 +23,7 @@ export const populateDb = async () => {
   });
 
   const companies = companyObjects.map((companyObject, companyIndex) => {
+    companyObject.description += '.';
     const company = new Company(companyObject);
 
     const countryIndex = companyIndex % 10;
