@@ -9,6 +9,9 @@ companiesRouter.get('/', async (request, response) => {
   const filterQuery = name ? { name: { $regex: name, $options: 'i' } } : {};
 
   const companies = await Company.find(filterQuery)
+    .populate('country', {
+      name: 1,
+    })
     .populate('managers', {
       name: 1,
       description: 1,
