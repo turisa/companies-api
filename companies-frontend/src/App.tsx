@@ -1,14 +1,15 @@
 import React from 'react';
-import './App.css';
 import { Switch, Route, Redirect, Link } from 'react-router-dom';
 import Companies from './components/Companies';
 import Countries from './components/Countries';
 import Jobs from './components/Jobs';
 import Managers from './components/Managers';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <div className="App">
+      <Navbar />
       <h1>Companies API</h1>
       <Switch>
         <Route path="/companies">
