@@ -19,7 +19,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-indigo-500 p-6">
+    <nav className="flex items-center justify-between flex-wrap bg-indigo-500 p-6 shadow-lg fixed w-screen pl-52 pr-52">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
         <svg
           xmlns="http://www.w3.org/2000/svg"

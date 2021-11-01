@@ -1,19 +1,15 @@
-import { useEffect, useState } from 'react';
-
 import Country from '../types/Country';
-import countriesService from '../services/countriesService';
 
-const Countries = () => {
-  const [countries, setCountries] = useState<Country[]>([]);
-
-  useEffect(() => {
-    countriesService.getAll().then((result) => setCountries(result));
-  }, []);
-
+const Countries = ({ countries }: { countries: Country[] }) => {
   return (
-    <div>
+    <div className="flex flex-col gap-y-2 pt-24">
       {countries.map((country) => (
-        <p>{country.name}</p>
+        <div
+          className="ml-48 mr-48 p-3 bg-white shadow-lg max-h-32"
+          key={country.id}
+        >
+          <h2 className="font-bold text-gray-500">{country.name}</h2>
+        </div>
       ))}
     </div>
   );

@@ -1,18 +1,15 @@
-import { useEffect, useState } from 'react';
-import managersService from '../services/managersService';
 import Manager from '../types/Manager';
 
-const Managers = () => {
-  const [managers, setManagers] = useState<Manager[]>([]);
-
-  useEffect(() => {
-    managersService.getAll().then((result) => setManagers(result));
-  }, []);
-
+const Managers = ({ managers }: { managers: Manager[] }) => {
   return (
-    <div>
+    <div className="flex flex-col gap-y-2 pt-24">
       {managers.map((manager) => (
-        <p>{manager.name}</p>
+        <div
+          className="ml-48 mr-48 p-3 bg-white shadow-lg max-h-32"
+          key={manager.id}
+        >
+          <h2 className="font-bold text-gray-500">{manager.name}</h2>
+        </div>
       ))}
     </div>
   );
