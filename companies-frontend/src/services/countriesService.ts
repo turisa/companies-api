@@ -1,11 +1,12 @@
 import axios from 'axios';
 
 import Country from '../types/Country';
+import { service } from './genericService';
 
 const baseUrl = 'http://localhost:4000/api/countries';
 
-const getAll = async () => {
-  const response = await axios.get(baseUrl);
+const getAll = async (params?: { name: string }) => {
+  const response = await axios.get(baseUrl, { params });
   const countries: Country[] = response.data;
 
   return countries;

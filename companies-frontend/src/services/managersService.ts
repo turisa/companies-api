@@ -4,8 +4,8 @@ import Manager from '../types/Manager';
 
 const baseUrl = 'http://localhost:4000/api/managers';
 
-const getAll = async () => {
-  const response = await axios.get(baseUrl);
+const getAll = async (params?: { name: string }) => {
+  const response = await axios.get(baseUrl, { params });
   const managers: Manager[] = response.data;
 
   return managers;

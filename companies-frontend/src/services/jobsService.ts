@@ -4,8 +4,8 @@ import Job from '../types/Job';
 
 const baseUrl = 'http://localhost:4000/api/jobs';
 
-const getAll = async () => {
-  const response = await axios.get(baseUrl);
+const getAll = async (params?: { name: string }) => {
+  const response = await axios.get(baseUrl, { params });
   const jobs: Job[] = response.data;
 
   return jobs;

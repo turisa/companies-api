@@ -4,8 +4,8 @@ import Company from '../types/Company';
 
 const baseUrl = 'http://localhost:4000/api/companies';
 
-const getAll = async () => {
-  const response = await axios.get(baseUrl);
+const getAll = async (params?: { name: string }) => {
+  const response = await axios.get(baseUrl, { params });
   const companies: Company[] = response.data;
 
   return companies;
