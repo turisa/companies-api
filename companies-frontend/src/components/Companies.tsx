@@ -1,10 +1,26 @@
-import Company from '../types/Company';
+import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 
-const Companies = ({ companies }: { companies: Company[] }) => {
+import Company from '../types/Company';
+import companiesService from '../services/companiesService';
+
+const Companies = () => {
+  const [companies, setCompanies] = useState<Company[]>([]);
+  const history = useHistory();
+
+  useEffect(() => {
+    companiesService.getAll().then((companies) => setCompanies(companies));
+  }, []);
+
+  const viewDetails = (id: string) => {
+    history.push(`companies/${id}`);
+  };
+
   return (
     <div className="flex flex-col items-center gap-y-2 pt-24">
       {companies.map((company) => (
         <div
+          onClick={() => viewDetails(company.id)}
           className="grid grid-cols-4 w-full xl:w-10/12 p-3 bg-white shadow-sm max-h-32 transition ease-linear duration-100 hover:shadow-md"
           key={company.id}
         >
