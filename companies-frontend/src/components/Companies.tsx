@@ -5,10 +5,15 @@ const Companies = ({ companies }: { companies: Company[] }) => {
     <div className="flex flex-col gap-y-2 pt-24">
       {companies.map((company) => (
         <div
-          className="grid grid-cols-3 ml-80 mr-80 p-3 bg-white shadow-sm max-h-32 transition ease-linear duration-100 hover:shadow-md"
+          className="grid grid-cols-4 xl:ml-64 xl:mr-64 p-3 bg-white shadow-sm max-h-32 transition ease-linear duration-100 hover:shadow-md"
           key={company.id}
         >
           <h2 className="text-gray-500">{company.name}</h2>
+          <div>
+            <p className="text-gray-400 text-sm">
+              {company.managers.length} managers
+            </p>
+          </div>
           <div className="text-gray-400 text-sm">
             {company.jobs.length} jobs available
           </div>
