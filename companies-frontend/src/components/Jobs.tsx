@@ -9,10 +9,6 @@ const Jobs = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const history = useHistory();
 
-  useEffect(() => {
-    jobsService.getAll().then((result) => setJobs(result));
-  }, []);
-
   const searchJobs = (searchInput: string) => {
     jobsService.getAll({ name: searchInput }).then((response) => {
       setJobs(response);
@@ -22,6 +18,10 @@ const Jobs = () => {
   const viewDetails = (id: string) => {
     history.push(`jobs/${id}`);
   };
+
+  useEffect(() => {
+    jobsService.getAll().then((result) => setJobs(result));
+  }, []);
 
   return (
     <div className="flex flex-col items-center gap-y-2 pt-24">

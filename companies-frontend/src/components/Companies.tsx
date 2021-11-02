@@ -7,17 +7,16 @@ import SearchBar from './SearchBar';
 
 const Companies = () => {
   const [companies, setCompanies] = useState<Company[]>([]);
-
   const history = useHistory();
-
-  const viewDetails = (id: string) => {
-    history.push(`companies/${id}`);
-  };
 
   const searchCompanies = (searchInput: string) => {
     companiesService.getAll({ name: searchInput }).then((response) => {
       setCompanies(response);
     });
+  };
+
+  const viewDetails = (id: string) => {
+    history.push(`companies/${id}`);
   };
 
   useEffect(() => {

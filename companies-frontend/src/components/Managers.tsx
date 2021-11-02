@@ -9,19 +9,19 @@ const Managers = () => {
   const [managers, setManagers] = useState<Manager[]>([]);
   const history = useHistory();
 
-  useEffect(() => {
-    managersService.getAll().then((result) => setManagers(result));
-  }, []);
-
-  const viewDetails = (id: string) => {
-    history.push(`managers/${id}`);
-  };
-
   const searchJobs = (searchInput: string) => {
     managersService.getAll({ name: searchInput }).then((response) => {
       setManagers(response);
     });
   };
+
+  const viewDetails = (id: string) => {
+    history.push(`managers/${id}`);
+  };
+
+  useEffect(() => {
+    managersService.getAll().then((result) => setManagers(result));
+  }, []);
 
   return (
     <div className="flex flex-col items-center gap-y-2 pt-24">

@@ -15,13 +15,13 @@ const Countries = () => {
     });
   };
 
-  useEffect(() => {
-    countriesService.getAll().then((result) => setCountries(result));
-  }, []);
-
   const viewDetails = (id: string) => {
     history.push(`countries/${id}`);
   };
+
+  useEffect(() => {
+    countriesService.getAll().then((result) => setCountries(result));
+  }, []);
 
   return (
     <div className="flex flex-col items-center gap-y-2 pt-24">
