@@ -7,53 +7,39 @@ import Jobs from './components/Jobs';
 import Managers from './components/Managers';
 import Navbar from './components/Navbar';
 
-import Company from './types/Company';
-import Country from './types/Country';
-import Job from './types/Job';
-import Manager from './types/Manager';
-
-import companiesService from './services/companiesService';
-import countriesService from './services/countriesService';
-import jobsService from './services/jobsService';
-import managersService from './services/managersService';
+import CompanyDetail from './components/CompanyDetail';
+import CountryDetail from './components/CountryDetail';
+import JobDetail from './components/JobDetail';
+import ManagerDetail from './components/ManagerDetail';
 
 function App() {
-  const [companies, setCompanies] = useState<Company[]>([]);
-  const [countries, setCountries] = useState<Country[]>([]);
-  const [jobs, setJobs] = useState<Job[]>([]);
-  const [managers, setManagers] = useState<Manager[]>([]);
-
-  useEffect(() => {
-    companiesService.getAll().then((companies) => setCompanies(companies));
-  }, []);
-
-  useEffect(() => {
-    countriesService.getAll().then((result) => setCountries(result));
-  }, []);
-
-  useEffect(() => {
-    jobsService.getAll().then((result) => setJobs(result));
-  }, []);
-
-  useEffect(() => {
-    managersService.getAll().then((result) => setManagers(result));
-  }, []);
-
   return (
     <div className="bg-gray-100 sticky min-h-screen h-full w-screen">
       <Navbar />
       <Switch>
+        <Route path="/companies/:id">
+          <CompanyDetail />
+        </Route>
+        <Route path="/countries/:id">
+          <CountryDetail />
+        </Route>
+        <Route path="/jobs/:id">
+          <JobDetail />
+        </Route>
+        <Route path="/managers/:id">
+          <ManagerDetail />
+        </Route>
         <Route path="/companies">
-          <Companies companies={companies} />
+          <Companies />
         </Route>
         <Route path="/countries">
-          <Countries countries={countries} />
+          <Countries />
         </Route>
         <Route path="/jobs">
-          <Jobs jobs={jobs} />
+          <Jobs />
         </Route>
         <Route path="/managers">
-          <Managers managers={managers} />
+          <Managers />
         </Route>
         <Route path="/">
           <Redirect to="/companies" />
