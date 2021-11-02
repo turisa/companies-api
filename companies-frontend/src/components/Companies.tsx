@@ -5,7 +5,7 @@ const Companies = ({ companies }: { companies: Company[] }) => {
     <div className="flex flex-col items-center gap-y-2 pt-24">
       {companies.map((company) => (
         <div
-          className="grid grid-cols-4 xl:w-10/12 p-3 bg-white shadow-sm max-h-32 transition ease-linear duration-100 hover:shadow-md"
+          className="grid grid-cols-4 w-full xl:w-10/12 p-3 bg-white shadow-sm max-h-32 transition ease-linear duration-100 hover:shadow-md"
           key={company.id}
         >
           <h2 className="text-gray-500">{company.name}</h2>
