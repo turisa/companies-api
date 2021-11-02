@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Job from '../types/Job';
 import jobsService from '../services/jobsService';
 import { useHistory } from 'react-router';
+import SearchBar from './SearchBar';
 
 const Jobs = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -12,16 +13,23 @@ const Jobs = () => {
     jobsService.getAll().then((result) => setJobs(result));
   }, []);
 
+  const searchJobs = (searchInput: string) => {
+    jobsService.getAll({ name: searchInput }).then((response) => {
+      setJobs(response);
+    });
+  };
+
   const viewDetails = (id: string) => {
     history.push(`jobs/${id}`);
   };
 
   return (
     <div className="flex flex-col items-center gap-y-2 pt-24">
+      <SearchBar onSubmit={searchJobs} />
       {jobs.map((job) => (
         <div
           onClick={() => viewDetails(job.id)}
-          className="grid grid-cols-2 w-10/12 xl:w-1/2 p-3 bg-white shadow-sm max-h-32 transition ease-linear duration-100 hover:shadow-md"
+          className="grid grid-cols-2  w-full xl:w-8/12 p-3 bg-white shadow-sm max-h-32 transition ease-linear duration-100 hover:shadow-md"
           key={job.id}
         >
           <h2 className="text-gray-500">{job.name}</h2>
