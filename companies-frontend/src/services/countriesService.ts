@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 import Country from '../types/Country';
-import { service } from './genericService';
 
 const baseUrl = 'http://localhost:4000/api/countries';
 
