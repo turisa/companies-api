@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Switch, Route, Redirect, Link } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Companies from './components/Companies';
 import Countries from './components/Countries';
