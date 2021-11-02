@@ -4,5 +4,5 @@ export default interface Job {
   id: string;
   name: string;
   description: string;
-  company: Company[];
+  company: Company;
 }
