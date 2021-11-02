@@ -12,7 +12,7 @@ const Companies = ({ companies }: { companies: Company[] }) => {
           <div className="text-gray-400 text-sm">
             {company.jobs.length} jobs available
           </div>
-          <div className="text-gray-400 flex items-center gap-x-1 text-sm">
+          <div className="flex items-center gap-x-1 text-gray-400 text-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-4 w-4 text-red-400"
