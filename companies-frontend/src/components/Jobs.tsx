@@ -1,10 +1,26 @@
-import Job from '../types/Job';
+import { useState, useEffect } from 'react';
 
-const Jobs = ({ jobs }: { jobs: Job[] }) => {
+import Job from '../types/Job';
+import jobsService from '../services/jobsService';
+import { useHistory } from 'react-router';
+
+const Jobs = () => {
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const history = useHistory();
+
+  useEffect(() => {
+    jobsService.getAll().then((result) => setJobs(result));
+  }, []);
+
+  const viewDetails = (id: string) => {
+    history.push(`jobs/${id}`);
+  };
+
   return (
     <div className="flex flex-col items-center gap-y-2 pt-24">
       {jobs.map((job) => (
         <div
+          onClick={() => viewDetails(job.id)}
           className="grid grid-cols-2 w-10/12 xl:w-1/2 p-3 bg-white shadow-sm max-h-32 transition ease-linear duration-100 hover:shadow-md"
           key={job.id}
         >
