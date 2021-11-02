@@ -22,7 +22,6 @@ const ManagerDetail = () => {
           <p className="text-xl text-gray-500 p-3">{manager.name}</p>
         </div>
         <p className="text-sm px-3 text-gray-400">{manager.description}</p>
-
         <div className="flex flex-col bg-white">
           <div className="flex flex-col h-1/2">
             <p className="pl-3 pb-2 my-3 text-gray-500  border-gray-300 border-b-2">
