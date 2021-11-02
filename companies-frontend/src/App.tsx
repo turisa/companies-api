@@ -40,7 +40,7 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 sticky min-h-screen h-full w-screen">
       <Navbar />
       <Switch>
         <Route path="/companies">
