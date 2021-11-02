@@ -26,6 +26,7 @@ const Jobs = () => {
   return (
     <div className="flex flex-col items-center gap-y-2 pt-24">
       <SearchBar onSubmit={searchJobs} />
+
       {jobs.map((job) => (
         <div
           onClick={() => viewDetails(job.id)}
