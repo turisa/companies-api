@@ -1,10 +1,26 @@
-import Country from '../types/Country';
+import { useState, useEffect } from 'react';
 
-const Countries = ({ countries }: { countries: Country[] }) => {
+import Country from '../types/Country';
+import countriesService from '../services/countriesService';
+import { useHistory } from 'react-router';
+
+const Countries = () => {
+  const [countries, setCountries] = useState<Country[]>([]);
+  const history = useHistory();
+
+  useEffect(() => {
+    countriesService.getAll().then((result) => setCountries(result));
+  }, []);
+
+  const viewDetails = (id: string) => {
+    history.push(`countries/${id}`);
+  };
+
   return (
     <div className="flex flex-col items-center gap-y-2 pt-24">
       {countries.map((country) => (
         <div
+          onClick={() => viewDetails(country.id)}
           className="grid grid-cols-2 w-8/12 xl:w-3/12 p-3 bg-white shadow-sm max-h-32 transition ease-linear duration-100 hover:shadow-md"
           key={country.id}
         >
