@@ -10,12 +10,20 @@ import CompanyDetail from './components/CompanyDetail';
 import CountryDetail from './components/CountryDetail';
 import JobDetail from './components/JobDetail';
 import ManagerDetail from './components/ManagerDetail';
+import LoginForm from './components/LoginForm';
+import SignUpForm from './components/SignUpForm';
 
 function App() {
   return (
     <div className="bg-gray-100 sticky min-h-screen h-full w-screen">
       <Navbar />
       <Switch>
+        <Route path="/signup">
+          <SignUpForm />
+        </Route>
+        <Route path="/login">
+          <LoginForm />
+        </Route>
         <Route path="/companies/:id">
           <CompanyDetail />
         </Route>
