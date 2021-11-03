@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom';
+
 const SignUpForm = () => {
   return (
-    <div className="flex justify-center h-screen items-center border-2">
+    <div className="flex flex-col justify-center h-screen items-center border-2">
       <div className="flex w-auto shadow-lg p-6 justify-center bg-white rounded-sm">
         <div className="flex flex-col">
           <div className="flex justify-start">
@@ -38,7 +40,9 @@ const SignUpForm = () => {
             </button>
           </form>
           <div className="flex justify-center">
-            <p className="text-sm pt-1 underline">Log in</p>
+            <Link to="/login">
+              <p className="text-sm pt-1 underline">Log in</p>
+            </Link>
           </div>
         </div>
       </div>
