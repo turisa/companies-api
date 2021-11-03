@@ -1,19 +1,15 @@
-import dotenv from 'dotenv';
 import http from 'http';
 import mongoose from 'mongoose';
 
 import app from './app';
 import { clearDb, populateDb } from './utils/db_helper';
 
-dotenv.config();
-
-const MONGODB_URI = 'mongodb://username:password@mongo:27017/database';
-const PORT = 4000;
+const { MONGODB_URL, PORT } = process.env;
 
 const connectToDb = async () => {
   try {
-    console.log(`Connecting to ${MONGODB_URI}`);
-    await mongoose.connect(MONGODB_URI);
+    console.log(`Connecting to ${MONGODB_URL}`);
+    await mongoose.connect(MONGODB_URL);
     console.log('Connected to db');
 
     console.log('Clearing db');
