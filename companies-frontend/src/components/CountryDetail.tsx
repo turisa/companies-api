@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 
 import Country from '../types/Country';
-import countriesService from '../services/countriesService';
+import countriesService from '../services/countries';
 
 const CountryDetail = () => {
   const [country, setCountry] = useState<Country>();

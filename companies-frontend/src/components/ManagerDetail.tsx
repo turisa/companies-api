@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 
 import Manager from '../types/Manager';
-import managersService from '../services/managersService';
+import managersService from '../services/managers';
 
 const ManagerDetail = () => {
   const [manager, setManager] = useState<Manager>();

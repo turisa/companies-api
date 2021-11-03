@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 
 import Company from '../types/Company';
-import companiesService from '../services/companiesService';
+import companiesService from '../services/companies';
 import SearchBar from './SearchBar';
 
 const Companies = () => {

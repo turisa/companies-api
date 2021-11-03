@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import Job from '../types/Job';
-import jobsService from '../services/jobsService';
+import jobsService from '../services/jobs';
 import { useHistory } from 'react-router';
 import SearchBar from './SearchBar';
 

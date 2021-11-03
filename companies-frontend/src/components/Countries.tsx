@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import Country from '../types/Country';
-import countriesService from '../services/countriesService';
+import countriesService from '../services/countries';
 import { useHistory } from 'react-router';
 import SearchBar from './SearchBar';
 

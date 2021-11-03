@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import Manager from '../types/Manager';
-import managersService from '../services/managersService';
+import managersService from '../services/managers';
 import { useHistory } from 'react-router';
 import SearchBar from './SearchBar';
 

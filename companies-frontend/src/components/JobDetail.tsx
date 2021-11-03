@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 
 import Job from '../types/Job';
-import jobsService from '../services/jobsService';
+import jobsService from '../services/jobs';
 
 const JobDetail = () => {
   const [job, setJob] = useState<Job>();

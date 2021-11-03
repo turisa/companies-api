@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 
 import Company from '../types/Company';
-import companiesService from '../services/companiesService';
+import companiesService from '../services/companies';
 
 const CompanyDetail = () => {
   const [company, setCompany] = useState<Company>();
