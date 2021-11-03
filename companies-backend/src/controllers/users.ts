@@ -11,7 +11,7 @@ usersRouter.get('/', async (request, response) => {
 });
 
 usersRouter.post('/', async (request, response) => {
-  const { username, password } = request.body;
+  const { username, name, password } = request.body;
 
   if (password.length < 3) {
     return response.status(400).json({
@@ -22,7 +22,7 @@ usersRouter.post('/', async (request, response) => {
   const saltRounds = 10;
   const passwordHash = await bcrypt.hash(password, saltRounds);
 
-  const user = new User({ username, passwordHash });
+  const user = new User({ username, name, passwordHash });
 
   const savedUser = await user.save();
   response.json(savedUser);
