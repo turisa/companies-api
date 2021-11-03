@@ -1,11 +1,26 @@
 version: '3.8'
 
 services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: username
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: database
+    volumes:
+      - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
   app-backend:
     image: companies-backend-server
     build: ./companies-backend
     ports:
       - 4000:4000
+    depends_on:
+      - mongo
+    environment:
+      WAIT_HOSTS: mongo:27017
   app-frontend:
     image: companies-frontend-server
     build: ./companies-frontend
