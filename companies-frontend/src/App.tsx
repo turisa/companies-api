@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Companies from './components/Companies';
@@ -10,35 +11,41 @@ import CompanyDetail from './components/CompanyDetail';
 import CountryDetail from './components/CountryDetail';
 import JobDetail from './components/JobDetail';
 import ManagerDetail from './components/ManagerDetail';
+import LoginForm from './components/LoginForm';
+
+import User from './types/User';
 
 function App() {
+  const [user, setUser] = useState<User | null>(null);
+
   return (
     <div className="bg-gray-100 sticky min-h-screen h-full w-screen">
-      <Navbar />
+      {user ? <Navbar /> : null}
       <Switch>
+        <Route path="/login">
+          <LoginForm />
+        </Route>
         <Route path="/companies/:id">
-          <CompanyDetail />
+          {user ? <CompanyDetail /> : <Redirect to="/login" />}
         </Route>
         <Route path="/countries/:id">
-          <CountryDetail />
+          {user ? <CountryDetail /> : <Redirect to="/login" />}
         </Route>
         <Route path="/jobs/:id">
-          <JobDetail />
+          {user ? <JobDetail /> : <Redirect to="/login" />}
         </Route>
         <Route path="/managers/:id">
-          <ManagerDetail />
+          {user ? <ManagerDetail /> : <Redirect to="/login" />}
         </Route>
         <Route path="/companies">
-          <Companies />
+          {user ? <Companies /> : <Redirect to="/login" />}
         </Route>
         <Route path="/countries">
-          <Countries />
+          {user ? <Countries /> : <Redirect to="/login" />}
         </Route>
-        <Route path="/jobs">
-          <Jobs />
-        </Route>
+        <Route path="/jobs">{user ? <Jobs /> : <Redirect to="/login" />}</Route>
         <Route path="/managers">
-          <Managers />
+          {user ? <Managers /> : <Redirect to="/login" />}
         </Route>
         <Route path="/">
           <Redirect to="/companies" />
