@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  app-backend:
+    image: companies-backend-server
+    build: ./companies-backend
+    ports:
+      - 4000:4000
+  app-frontend:
+    image: companies-frontend-server
+    build: ./companies-frontend
+    ports:
+      - 5000:5000
