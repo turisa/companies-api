@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const LoginForm = () => {
   return (
     <div className="flex justify-center h-screen items-center border-2">
@@ -30,7 +32,9 @@ const LoginForm = () => {
             </button>
           </form>
           <div className="flex justify-center">
-            <p className="text-sm pt-1 underline">Sign up</p>
+            <Link to="/signup">
+              <p className="text-sm pt-1 underline">Sign up</p>
+            </Link>
           </div>
         </div>
       </div>
