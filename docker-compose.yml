@@ -21,6 +21,8 @@ services:
       - mongo
     environment:
       WAIT_HOSTS: mongo:27017
+      MONGODB_URL: mongodb://username:password@mongo:27017/database
+      PORT: 4000
   app-frontend:
     image: companies-frontend-server
     build: ./companies-frontend
