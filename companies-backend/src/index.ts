@@ -7,10 +7,12 @@ import { clearDb, populateDb } from './utils/db_helper';
 
 dotenv.config();
 
-const { PORT, MONGODB_URI } = process.env;
+const MONGODB_URI = 'mongodb://username:password@mongo:27017/database';
+const PORT = 4000;
 
 const connectToDb = async () => {
   try {
+    console.log(`Connecting to ${MONGODB_URI}`);
     await mongoose.connect(MONGODB_URI);
     console.log('Connected to db');
 
@@ -21,6 +23,8 @@ const connectToDb = async () => {
     await populateDb();
   } catch (error) {
     console.log('Failed to connect');
+    console.log('abcd');
+    console.log(error.message);
   }
 };
 
