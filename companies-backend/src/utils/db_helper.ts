@@ -1,3 +1,4 @@
+import User from '../models/user';
 import Company from '../models/company';
 import Country, { ICountry } from '../models/country';
 import Job from '../models/job';
@@ -9,6 +10,7 @@ import jobObjects from '../utils/db_helper_data/jobs';
 import managerObjects from '../utils/db_helper_data/managers';
 
 export const clearDb = async () => {
+  await User.deleteMany({});
   await Country.deleteMany({});
   await Company.deleteMany({});
   await Job.deleteMany({});
