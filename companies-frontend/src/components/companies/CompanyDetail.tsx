@@ -12,7 +12,7 @@ const CompanyDetail = () => {
     companiesService.get(id).then((result) => {
       setCompany(result);
     });
-  }, [id, company]);
+  }, [id]);
 
   return company ? (
     <div className="flex w-screen justify-center">
@@ -31,7 +31,7 @@ const CompanyDetail = () => {
             </p>
             <div className="flex flex-col">
               {company.managers.map((manager) => (
-                <p className="text-sm px-3 py-1 text-gray-400">
+                <p key={manager.id} className="text-sm px-3 py-1 text-gray-400">
                   {manager.name}
                 </p>
               ))}
@@ -43,7 +43,9 @@ const CompanyDetail = () => {
             </p>
             <div className="flex flex-col">
               {company.jobs.map((job) => (
-                <p className="px-3 py-1 text-sm text-gray-400">{job.name}</p>
+                <p key={job.id} className="px-3 py-1 text-sm text-gray-400">
+                  {job.name}
+                </p>
               ))}
             </div>
           </div>

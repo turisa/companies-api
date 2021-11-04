@@ -12,7 +12,7 @@ const CountryDetail = () => {
     countriesService.get(id).then((result) => {
       setCountry(result);
     });
-  }, [id, country]);
+  }, [id]);
 
   return country ? (
     <div className="flex w-screen justify-center">
@@ -29,7 +29,7 @@ const CountryDetail = () => {
             </p>
             <div className="flex flex-col">
               {country.companies.map((company) => (
-                <p className="text-sm px-3 py-1 text-gray-400">
+                <p key={company.id} className="text-sm px-3 py-1 text-gray-400">
                   {company.name}
                 </p>
               ))}

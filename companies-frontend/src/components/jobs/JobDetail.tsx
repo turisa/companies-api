@@ -12,7 +12,7 @@ const JobDetail = () => {
     jobsService.get(id).then((result) => {
       setJob(result);
     });
-  }, [id, job]);
+  }, [id]);
 
   return job ? (
     <div className="flex w-screen justify-center">
