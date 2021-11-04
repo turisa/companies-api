@@ -3,12 +3,13 @@ import express from 'express';
 import jsonwebtoken from 'jsonwebtoken';
 
 import User from '../models/user';
+
 const loginRouter = express.Router();
 
 loginRouter.post('/', async (request, response) => {
   const body = request.body;
 
-  const user: any = await User.findOne({ username: body.username }); // todo fix this
+  const user = await User.findOne({ username: body.username });
   const passwordCorrect = user
     ? await bcrypt.compare(body.password, user.passwordHash)
     : false;
