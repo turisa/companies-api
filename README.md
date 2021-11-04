@@ -1,6 +1,6 @@
 # companies-api
 
-A REST API built with express and mongoose that enables access to imaginary companies, managers, jobs and countries.
+A REST API built with Express and Mongoose that enables access to imaginary companies, managers, jobs and countries.
 
 All data was generated using [Faker](https://faker.readthedocs.io/en/master/).
 
