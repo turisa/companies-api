@@ -6,7 +6,10 @@ const companiesRouter = express.Router();
 
 companiesRouter.get('/', async (request, response) => {
   const name = request.query.name;
-  const filterQuery = name ? { name: { $regex: name, $options: 'i' } } : {};
+
+  const filterQuery = name
+    ? { name: { $regex: name as string, $options: 'i' } }
+    : {};
 
   const companies = await Company.find(filterQuery)
     .populate('country', {

@@ -6,7 +6,10 @@ const managersRouter = express.Router();
 
 managersRouter.get('/', async (request, response) => {
   const name = request.query.name;
-  const filterQuery = name ? { name: { $regex: name, $options: 'i' } } : {};
+
+  const filterQuery = name
+    ? { name: { $regex: name as string, $options: 'i' } }
+    : {};
 
   const managers = await Manager.find(filterQuery).populate('companies', {
     name: 1,

@@ -4,12 +4,6 @@ import express from 'express';
 import User from '../models/user';
 const usersRouter = express.Router();
 
-usersRouter.get('/', async (request, response) => {
-  const users = await User.find({});
-
-  response.json(users);
-});
-
 usersRouter.post('/', async (request, response) => {
   const { username, name, password } = request.body;
 

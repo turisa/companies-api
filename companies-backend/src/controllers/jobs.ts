@@ -6,7 +6,10 @@ const jobsRouter = express.Router();
 
 jobsRouter.get('/', async (request, response) => {
   const name = request.query.name;
-  const queryFilter = name ? { name: { $regex: name, $options: 'i' } } : {};
+
+  const queryFilter = name
+    ? { name: { $regex: name as string, $options: 'i' } }
+    : {};
 
   const jobs = await Job.find(queryFilter).populate('company', {
     name: 1,
