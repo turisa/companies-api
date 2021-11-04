@@ -11,6 +11,7 @@ export interface IJob extends mongoose.Document {
 const jobSchema = new mongoose.Schema({
   name: String,
   description: String,
+
   company: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Company',

@@ -11,6 +11,7 @@ export interface IManager extends mongoose.Document {
 const managerSchema = new mongoose.Schema({
   name: String,
   description: String,
+
   companies: [
     {
       type: mongoose.Schema.Types.ObjectId,
