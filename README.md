@@ -13,3 +13,8 @@ docker-compose -f docker-compose.yml up -d
 
 2) visit http://localhost:3000
 
+3) To stop the services, run:
+
+```
+docker-compose stop
+```
