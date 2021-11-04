@@ -32,4 +32,4 @@ loginRouter.post('/', async (request, response) => {
     .send({ token, username: body.username, name: user.name });
 });
 
-module.exports = loginRouter;
+export default loginRouter;
