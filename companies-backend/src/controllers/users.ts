@@ -17,10 +17,16 @@ usersRouter.post('/', async (request, response) => {
   const saltRounds = 10;
   const passwordHash = await bcrypt.hash(password, saltRounds);
 
-  const user = new User({ username, name, passwordHash });
+  try {
+    const user = new User({ username, name, passwordHash });
 
-  const savedUser = await user.save();
-  response.json(savedUser);
+    const savedUser = await user.save();
+    response.json(savedUser);
+  } catch (error) {
+    response.status(422).json({
+      error: 'Username must be unique',
+    });
+  }
 });
 
 export default usersRouter;
