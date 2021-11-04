@@ -1,6 +1,7 @@
 import cors from 'cors';
 import express from 'express';
 
+import loginRouter from './controllers/login';
 import usersRouter from './controllers/users';
 import companiesRouter from './controllers/companies';
 import countriesRouter from './controllers/countries';
@@ -12,6 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use('/api/login', loginRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/companies', companiesRouter);
 app.use('/api/countries', countriesRouter);
