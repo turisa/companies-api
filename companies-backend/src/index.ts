@@ -1,7 +1,8 @@
 import http from 'http';
 import mongoose from 'mongoose';
+
 // import dotenv from 'dotenv';
-// dotenv.config()
+// dotenv.config();
 
 import app from './app';
 import { clearDb, populateDb } from './utils/db_helper';
