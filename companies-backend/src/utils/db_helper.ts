@@ -1,5 +1,5 @@
 import Company from '../models/company';
-import Country from '../models/country';
+import Country, { ICountry } from '../models/country';
 import Job from '../models/job';
 import Manager from '../models/manager';
 
