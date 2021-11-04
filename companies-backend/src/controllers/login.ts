@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import express, { response } from 'express';
+import express from 'express';
 import jsonwebtoken from 'jsonwebtoken';
 
 import User from '../models/user';
@@ -7,15 +7,15 @@ import User from '../models/user';
 const loginRouter = express.Router();
 
 loginRouter.post('/', async (request, response) => {
-  const body = request.body;
+  const { username, password } = request.body;
 
-  if (!body || !body.username || !body.password) {
+  if (!username || !password) {
     return response.status(400).json({ error: 'Username or password missing' });
   }
 
-  const user = await User.findOne({ username: body.username });
+  const user = await User.findOne({ username });
   const passwordCorrect = user
-    ? await bcrypt.compare(body.password, user.passwordHash)
+    ? await bcrypt.compare(password, user.passwordHash)
     : false;
 
   if (!user || !passwordCorrect) {
@@ -23,7 +23,7 @@ loginRouter.post('/', async (request, response) => {
   }
 
   const userForToken = {
-    username: body.username,
+    username,
     id: user._id,
   };
 
@@ -31,9 +31,7 @@ loginRouter.post('/', async (request, response) => {
     expiresIn: 60 * 60,
   });
 
-  response
-    .status(200)
-    .send({ token, username: body.username, name: user.name });
+  response.status(200).json({ token, username, name: user.name });
 });
 
 export default loginRouter;

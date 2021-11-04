@@ -8,6 +8,24 @@ const usersRouter = express.Router();
 usersRouter.post('/', async (request, response) => {
   const { username, name, password } = request.body;
 
+  if (!username) {
+    return response.status(400).json({
+      error: 'Username is required',
+    });
+  }
+
+  if (!name) {
+    return response.status(400).json({
+      error: 'Name is required',
+    });
+  }
+
+  if (!password) {
+    return response.status(400).json({
+      error: 'Password is required',
+    });
+  }
+
   if (password.length < 3) {
     return response.status(400).json({
       error: 'Password must be at least 3 characters long',
