@@ -1,4 +1,16 @@
 import mongoose from 'mongoose';
+import { ICountry } from './country';
+import { IJob } from './job';
+import { IManager } from './manager';
+
+export interface ICompany extends mongoose.Document {
+  name: string;
+  description: string;
+
+  country: ICountry;
+  jobs: IJob[];
+  managers: IManager[];
+}
 
 const companySchema = new mongoose.Schema({
   name: String,
@@ -30,6 +42,9 @@ companySchema.set('toJSON', {
   },
 });
 
-const Company = mongoose.model('Company', companySchema);
+const Company: mongoose.Model<ICompany> = mongoose.model(
+  'Company',
+  companySchema
+);
 
 export default Company;

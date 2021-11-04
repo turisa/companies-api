@@ -1,6 +1,13 @@
 import mongoose from 'mongoose';
+import { ICompany } from './company';
 
-const countrySchema = new mongoose.Schema({
+export interface ICountry extends mongoose.Document {
+  name: string;
+
+  companies: ICompany[];
+}
+
+export const countrySchema = new mongoose.Schema({
   name: String,
   companies: [
     {
@@ -19,6 +26,9 @@ countrySchema.set('toJSON', {
   },
 });
 
-const Country = mongoose.model('Country', countrySchema);
+const Country: mongoose.Model<ICountry> = mongoose.model(
+  'Country',
+  countrySchema
+);
 
 export default Country;

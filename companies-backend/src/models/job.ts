@@ -1,4 +1,12 @@
 import mongoose from 'mongoose';
+import { ICompany } from './company';
+
+export interface IJob extends mongoose.Document {
+  name: string;
+  description: string;
+
+  company: ICompany;
+}
 
 const jobSchema = new mongoose.Schema({
   name: String,
@@ -18,6 +26,6 @@ jobSchema.set('toJSON', {
   },
 });
 
-const Job = mongoose.model('Job', jobSchema);
+const Job: mongoose.Model<IJob> = mongoose.model('Job', jobSchema);
 
 export default Job;

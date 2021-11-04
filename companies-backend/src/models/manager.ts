@@ -1,4 +1,12 @@
 import mongoose from 'mongoose';
+import { ICompany } from './company';
+
+export interface IManager extends mongoose.Document {
+  name: string;
+  description: string;
+
+  companies: ICompany[];
+}
 
 const managerSchema = new mongoose.Schema({
   name: String,
@@ -20,6 +28,9 @@ managerSchema.set('toJSON', {
   },
 });
 
-const Manager = mongoose.model('Manager', managerSchema);
+const Manager: mongoose.Model<IManager> = mongoose.model(
+  'Manager',
+  managerSchema
+);
 
 export default Manager;
