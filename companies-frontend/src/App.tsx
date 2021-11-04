@@ -1,15 +1,15 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import Companies from './components/Companies';
-import Countries from './components/Countries';
-import Jobs from './components/Jobs';
-import Managers from './components/Managers';
+import Companies from './components/companies/Companies';
+import Countries from './components/countries/Countries';
+import Jobs from './components/jobs/Jobs';
+import Managers from './components/managers/Managers';
 import Navbar from './components/Navbar';
 
-import CompanyDetail from './components/CompanyDetail';
-import CountryDetail from './components/CountryDetail';
-import JobDetail from './components/JobDetail';
-import ManagerDetail from './components/ManagerDetail';
+import CompanyDetail from './components/companies/CompanyDetail';
+import CountryDetail from './components/countries/CountryDetail';
+import JobDetail from './components/jobs/JobDetail';
+import ManagerDetail from './components/managers/ManagerDetail';
 import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
 
