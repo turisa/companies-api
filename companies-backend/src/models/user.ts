@@ -1,4 +1,4 @@
-import mongoose, { Mongoose } from 'mongoose';
+import mongoose from 'mongoose';
 import mongooseUniqueValidator from 'mongoose-unique-validator';
 import { ICompany } from './company';
 
