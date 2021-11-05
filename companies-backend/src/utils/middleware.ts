@@ -15,27 +15,17 @@ export const requestLogger = morgan(
   ':method :url :status :res[content-length] - :response-time ms :body'
 );
 
-export const tokenExtractor = (
+export const tokenVerifier = (
   request: express.Request,
   response: express.Response,
   next: express.NextFunction
 ) => {
   const authorization = request.get('authorization');
 
-  request.token =
+  const token =
     authorization && authorization.toLowerCase().startsWith('bearer ')
       ? authorization.substring(7)
       : null;
-
-  next();
-};
-
-export const tokenValidator = (
-  request: express.Request,
-  response: express.Response,
-  next: express.NextFunction
-) => {
-  const token = request.token;
 
   const decodedToken = token
     ? jsonwebtoken.verify(token, process.env.SECRET)
@@ -46,6 +36,8 @@ export const tokenValidator = (
       error: 'Token missing or invalid',
     });
   }
+
+  request.token = decodedToken as { id: string };
 
   next();
 };
