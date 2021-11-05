@@ -11,6 +11,20 @@ const userSchema = new mongoose.Schema({
   username: { type: String, unique: true, minlength: 3 },
   name: String,
   passwordHash: String,
+
+  companyReviews: [
+    {
+      content: {
+        type: String,
+      },
+    },
+    {
+      company: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    },
+  ],
 });
 
 userSchema.set('toJSON', {
