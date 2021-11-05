@@ -41,3 +41,14 @@ export const tokenVerifier = (
 
   next();
 };
+
+export const errorHandler = (
+  error: any,
+  request: express.Request,
+  response: express.Response,
+  next: express.NextFunction
+) => {
+  console.log(error); // for now
+
+  next(error);
+};
