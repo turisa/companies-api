@@ -42,6 +42,10 @@ companiesRouter.get('/:id', async (request, response) => {
     .populate('jobs', {
       name: 1,
       description: 1,
+    })
+    .populate('reviews', {
+      id: 1,
+      content: 1,
     });
 
   response.json(companies);
