@@ -16,7 +16,7 @@ export interface ICompany extends mongoose.Document {
   reviews: {
     content: string;
     user: IUser;
-  };
+  }[];
 }
 
 const companySchema = new mongoose.Schema({
