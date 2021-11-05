@@ -1,10 +1,16 @@
 import mongoose, { Mongoose } from 'mongoose';
 import mongooseUniqueValidator from 'mongoose-unique-validator';
+import { ICompany } from './company';
 
 export interface IUser extends mongoose.Document {
   username: string;
   name: string;
   passwordHash: string;
+
+  reviews: {
+    content: string;
+    company: ICompany;
+  };
 }
 
 const userSchema = new mongoose.Schema({
