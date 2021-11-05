@@ -8,11 +8,7 @@ import countriesRouter from './controllers/countries';
 import jobsRouter from './controllers/jobs';
 import managersRouter from './controllers/managers';
 
-import {
-  requestLogger,
-  tokenExtractor,
-  tokenValidator,
-} from './utils/middleware';
+import { requestLogger, tokenVerifier } from './utils/middleware';
 
 const app = express();
 
@@ -23,9 +19,9 @@ app.use(requestLogger);
 
 app.use('/api/login', loginRouter);
 app.use('/api/users', usersRouter);
-app.use('/api/companies', tokenExtractor, tokenValidator, companiesRouter);
-app.use('/api/countries', tokenExtractor, tokenValidator, countriesRouter);
-app.use('/api/jobs', tokenExtractor, tokenValidator, jobsRouter);
-app.use('/api/managers', tokenExtractor, tokenValidator, managersRouter);
+app.use('/api/companies', tokenVerifier, companiesRouter);
+app.use('/api/countries', tokenVerifier, countriesRouter);
+app.use('/api/jobs', tokenVerifier, jobsRouter);
+app.use('/api/managers', tokenVerifier, managersRouter);
 
 export default app;
