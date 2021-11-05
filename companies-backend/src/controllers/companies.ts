@@ -1,5 +1,4 @@
 import express from 'express';
-import Review from '../models/review';
 
 import Company from '../models/company';
 
@@ -44,9 +43,7 @@ companiesRouter.get('/:id', async (request, response) => {
       name: 1,
       description: 1,
     })
-    .populate('reviews', {
-      content: 1,
-    });
+    .populate({ path: 'reviews', match: { deleted: false } });
 
   response.json(companies);
 });
