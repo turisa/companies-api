@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 import { ICountry } from './country';
 import { IJob } from './job';
 import { IManager } from './manager';

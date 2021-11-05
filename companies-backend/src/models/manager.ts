@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 import { ICompany } from './company';
 
 export interface IManager extends mongoose.Document {
