@@ -1,8 +1,6 @@
 import mongoose from 'mongoose';
 import mongooseUniqueValidator from 'mongoose-unique-validator';
 
-import { ICompany } from './company';
-
 export interface IUser extends mongoose.Document {
   username: string;
   name: string;
