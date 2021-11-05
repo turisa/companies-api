@@ -31,6 +31,20 @@ const companySchema = new mongoose.Schema({
       ref: 'Manager',
     },
   ],
+
+  reviews: [
+    {
+      content: {
+        type: String,
+      },
+    },
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    },
+  ],
 });
 
 companySchema.set('toJSON', {
