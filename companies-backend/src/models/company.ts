@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import { ICountry } from './country';
 import { IJob } from './job';
 import { IManager } from './manager';
+import { IUser } from './user';
 
 export interface ICompany extends mongoose.Document {
   name: string;
@@ -10,6 +11,11 @@ export interface ICompany extends mongoose.Document {
   country: ICountry;
   jobs: IJob[];
   managers: IManager[];
+
+  reviews: {
+    content: string;
+    user: IUser;
+  };
 }
 
 const companySchema = new mongoose.Schema({
