@@ -7,31 +7,12 @@ export interface IUser extends mongoose.Document {
   username: string;
   name: string;
   passwordHash: string;
-
-  reviews: {
-    content: string;
-    company: ICompany;
-  }[];
 }
 
 const userSchema = new mongoose.Schema({
   username: { type: String, unique: true, minlength: 3 },
   name: String,
   passwordHash: String,
-
-  companyReviews: [
-    {
-      content: {
-        type: String,
-      },
-    },
-    {
-      company: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-      },
-    },
-  ],
 });
 
 userSchema.set('toJSON', {
