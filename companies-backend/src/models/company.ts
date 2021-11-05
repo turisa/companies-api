@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import { ICountry } from './country';
 import { IJob } from './job';
 import { IManager } from './manager';
-import { IUser } from './user';
+import { IReview } from './review';
 
 export interface ICompany extends mongoose.Document {
   name: string;
@@ -12,16 +12,13 @@ export interface ICompany extends mongoose.Document {
   country: ICountry;
   jobs: IJob[];
   managers: IManager[];
-
-  reviews: {
-    content: string;
-    user: IUser;
-  };
+  reviews: IReview[];
 }
 
 const companySchema = new mongoose.Schema({
   name: String,
   description: String,
+
   country: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Country',
@@ -38,18 +35,10 @@ const companySchema = new mongoose.Schema({
       ref: 'Manager',
     },
   ],
-
   reviews: [
     {
-      content: {
-        type: String,
-      },
-    },
-    {
-      user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-      },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Review',
     },
   ],
 });
