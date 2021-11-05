@@ -5,6 +5,7 @@ import { IUser } from './user';
 
 export interface IReview extends mongoose.Document {
   content: string;
+  deleted: boolean;
 
   company: ICompany;
   user: IUser;
@@ -12,6 +13,7 @@ export interface IReview extends mongoose.Document {
 
 const reviewSchema = new mongoose.Schema({
   content: String,
+  deleted: { type: Boolean, default: false },
 
   company: {
     type: mongoose.Schema.Types.ObjectId,
