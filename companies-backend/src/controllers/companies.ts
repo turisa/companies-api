@@ -1,4 +1,5 @@
 import express from 'express';
+import User from '../models/user';
 
 import Company from '../models/company';
 
@@ -44,6 +45,24 @@ companiesRouter.get('/:id', async (request, response) => {
     });
 
   response.json(companies);
+});
+
+companiesRouter.post('/:id/reviews', async (request, response) => {
+  const companyId = request.params.id;
+
+  const content: string = request.body.content;
+  const userId: string = request.token.id;
+
+  const company = await Company.findById(companyId);
+  const user = await User.findById(userId);
+
+  const review = {
+    content,
+    user,
+  };
+
+  company.reviews = company.reviews.concat(review);
+  company.save();
 });
 
 export default companiesRouter;
