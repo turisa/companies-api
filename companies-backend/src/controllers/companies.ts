@@ -62,6 +62,7 @@ companiesRouter.post('/:id/reviews', async (request, response) => {
   };
 
   company.reviews = company.reviews.concat(review);
+
   company.save();
 });
 
