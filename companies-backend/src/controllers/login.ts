@@ -31,7 +31,7 @@ loginRouter.post('/', async (request, response) => {
     expiresIn: 60 * 60,
   });
 
-  response.status(200).json({ token, username, name: user.name });
+  response.status(200).json({ token, username, id: user._id, name: user.name });
 });
 
 export default loginRouter;

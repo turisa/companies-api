@@ -5,6 +5,18 @@ import User from '../models/user';
 
 const usersRouter = express.Router();
 
+usersRouter.get('/:id', async (request, response) => {
+  const userIdFromParams = request.params.id;
+  const userId = request.token.id;
+
+  if (userIdFromParams !== userId) {
+    return response.status(401).end();
+  }
+
+  const user = await User.findById(userId);
+  response.json(user);
+});
+
 usersRouter.post('/', async (request, response) => {
   const { username, name, password } = request.body;
 
