@@ -9,23 +9,41 @@ const Managers = () => {
   const [managers, setManagers] = useState<Manager[]>([]);
   const history = useHistory();
 
-  const searchJobs = (searchInput: string) => {
-    managersService.getAll({ name: searchInput }).then((response) => {
-      setManagers(response);
-    });
+  const searchManagers = (searchInput: string) => {
+    const userJSON = window.localStorage.getItem('loggedUser');
+
+    if (userJSON) {
+      const user = JSON.parse(userJSON);
+      const token = user.token;
+
+      managersService
+        .getAll(token, { name: searchInput })
+        .then((result: Manager[]) => {
+          setManagers(result);
+        });
+    }
   };
 
   const viewDetails = (id: string) => {
-    history.push(`managers/${id}`);
+    history.push(`companies/${id}`);
   };
 
   useEffect(() => {
-    managersService.getAll().then((result) => setManagers(result));
+    const userJSON = window.localStorage.getItem('loggedUser');
+
+    if (userJSON) {
+      const user = JSON.parse(userJSON);
+      const token = user.token;
+
+      managersService.getAll(token).then((result: Manager[]) => {
+        setManagers(result);
+      });
+    }
   }, []);
 
   return (
     <div className="flex flex-col items-center gap-y-2 pt-24">
-      <SearchBar onSubmit={searchJobs} />
+      <SearchBar onSubmit={searchManagers} />
       {managers.map((manager) => (
         <div
           onClick={() => viewDetails(manager.id)}

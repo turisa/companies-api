@@ -10,17 +10,33 @@ const Jobs = () => {
   const history = useHistory();
 
   const searchJobs = (searchInput: string) => {
-    jobsService.getAll({ name: searchInput }).then((response) => {
-      setJobs(response);
-    });
+    const userJSON = window.localStorage.getItem('loggedUser');
+
+    if (userJSON) {
+      const user = JSON.parse(userJSON);
+      const token = user.token;
+
+      jobsService.getAll(token, { name: searchInput }).then((result: Job[]) => {
+        setJobs(result);
+      });
+    }
   };
 
   const viewDetails = (id: string) => {
-    history.push(`jobs/${id}`);
+    history.push(`companies/${id}`);
   };
 
   useEffect(() => {
-    jobsService.getAll().then((result) => setJobs(result));
+    const userJSON = window.localStorage.getItem('loggedUser');
+
+    if (userJSON) {
+      const user = JSON.parse(userJSON);
+      const token = user.token;
+
+      jobsService.getAll(token).then((result: Job[]) => {
+        setJobs(result);
+      });
+    }
   }, []);
 
   return (

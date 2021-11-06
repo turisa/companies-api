@@ -9,10 +9,18 @@ const JobDetail = () => {
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
-    jobsService.get(id).then((result) => {
-      setJob(result);
-    });
-  }, [id]);
+    const userJSON = window.localStorage.getItem('loggedUser');
+
+    if (userJSON) {
+      const user = JSON.parse(userJSON);
+      const token = user.token;
+
+      jobsService.get(id, token).then((result: Job) => {
+        console.log(job);
+        setJob(result);
+      });
+    }
+  }, []);
 
   return job ? (
     <div className="flex w-screen justify-center">

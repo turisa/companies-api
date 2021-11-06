@@ -9,10 +9,18 @@ const ManagerDetail = () => {
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
-    managersService.get(id).then((result) => {
-      setManager(result);
-    });
-  }, [id]);
+    const userJSON = window.localStorage.getItem('loggedUser');
+
+    if (userJSON) {
+      const user = JSON.parse(userJSON);
+      const token = user.token;
+
+      managersService.get(id, token).then((result: Manager) => {
+        console.log(manager);
+        setManager(result);
+      });
+    }
+  }, []);
 
   return manager ? (
     <div className="flex w-screen justify-center">

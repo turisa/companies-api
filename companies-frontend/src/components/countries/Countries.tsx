@@ -10,17 +10,35 @@ const Countries = () => {
   const history = useHistory();
 
   const searchCountries = (searchInput: string) => {
-    countriesService.getAll({ name: searchInput }).then((response) => {
-      setCountries(response);
-    });
+    const userJSON = window.localStorage.getItem('loggedUser');
+
+    if (userJSON) {
+      const user = JSON.parse(userJSON);
+      const token = user.token;
+
+      countriesService
+        .getAll(token, { name: searchInput })
+        .then((result: Country[]) => {
+          setCountries(result);
+        });
+    }
   };
 
   const viewDetails = (id: string) => {
-    history.push(`countries/${id}`);
+    history.push(`companies/${id}`);
   };
 
   useEffect(() => {
-    countriesService.getAll().then((result) => setCountries(result));
+    const userJSON = window.localStorage.getItem('loggedUser');
+
+    if (userJSON) {
+      const user = JSON.parse(userJSON);
+      const token = user.token;
+
+      countriesService.getAll(token).then((result: Country[]) => {
+        setCountries(result);
+      });
+    }
   }, []);
 
   return (

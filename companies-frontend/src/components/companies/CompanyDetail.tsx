@@ -5,14 +5,22 @@ import Company from '../../types/Company';
 import companiesService from '../../services/companies';
 
 const CompanyDetail = () => {
-  const [company, setCompany] = useState<Company>();
+  const [company, setCompany] = useState<Company | undefined>(undefined);
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
-    companiesService.get(id).then((result) => {
-      setCompany(result);
-    });
-  }, [id]);
+    const userJSON = window.localStorage.getItem('loggedUser');
+
+    if (userJSON) {
+      const user = JSON.parse(userJSON);
+      const token = user.token;
+
+      companiesService.get(id, token).then((result: Company) => {
+        console.log(company);
+        setCompany(result);
+      });
+    }
+  }, []);
 
   return company ? (
     <div className="flex w-screen justify-center">

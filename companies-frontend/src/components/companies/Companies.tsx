@@ -7,12 +7,22 @@ import SearchBar from '../shared/SearchBar';
 
 const Companies = () => {
   const [companies, setCompanies] = useState<Company[]>([]);
+
   const history = useHistory();
 
   const searchCompanies = (searchInput: string) => {
-    companiesService.getAll({ name: searchInput }).then((response) => {
-      setCompanies(response);
-    });
+    const userJSON = window.localStorage.getItem('loggedUser');
+
+    if (userJSON) {
+      const user = JSON.parse(userJSON);
+      const token = user.token;
+
+      companiesService
+        .getAll(token, { name: searchInput })
+        .then((result: Company[]) => {
+          setCompanies(result);
+        });
+    }
   };
 
   const viewDetails = (id: string) => {
@@ -20,7 +30,16 @@ const Companies = () => {
   };
 
   useEffect(() => {
-    companiesService.getAll().then((result) => setCompanies(result));
+    const userJSON = window.localStorage.getItem('loggedUser');
+
+    if (userJSON) {
+      const user = JSON.parse(userJSON);
+      const token = user.token;
+
+      companiesService.getAll(token).then((result: Company[]) => {
+        setCompanies(result);
+      });
+    }
   }, []);
 
   return (

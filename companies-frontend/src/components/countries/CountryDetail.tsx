@@ -9,10 +9,18 @@ const CountryDetail = () => {
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
-    countriesService.get(id).then((result) => {
-      setCountry(result);
-    });
-  }, [id]);
+    const userJSON = window.localStorage.getItem('loggedUser');
+
+    if (userJSON) {
+      const user = JSON.parse(userJSON);
+      const token = user.token;
+
+      countriesService.get(id, token).then((result: Country) => {
+        console.log(country);
+        setCountry(result);
+      });
+    }
+  }, []);
 
   return country ? (
     <div className="flex w-screen justify-center">

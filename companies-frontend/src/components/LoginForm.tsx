@@ -17,11 +17,13 @@ const LoginForm = () => {
 
     try {
       const user = await loginService.login(credentials);
+      console.log(user);
 
       window.localStorage.setItem('loggedUser', JSON.stringify(user));
+
       history.push('/');
     } catch (error) {
-      console.log(error);
+      console.log(error); // todo
     }
   };
 
