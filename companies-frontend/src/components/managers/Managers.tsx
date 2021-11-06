@@ -5,40 +5,26 @@ import managersService from '../../services/managers';
 import { useHistory } from 'react-router';
 import SearchBar from '../shared/SearchBar';
 
-const Managers = () => {
+const Managers = ({ token }: { token: string }) => {
   const [managers, setManagers] = useState<Manager[]>([]);
   const history = useHistory();
 
   const searchManagers = (searchInput: string) => {
-    const userJSON = window.localStorage.getItem('loggedUser');
-
-    if (userJSON) {
-      const user = JSON.parse(userJSON);
-      const token = user.token;
-
-      managersService
-        .getAll(token, { name: searchInput })
-        .then((result: Manager[]) => {
-          setManagers(result);
-        });
-    }
+    managersService
+      .getAll(token, { name: searchInput })
+      .then((result: Manager[]) => {
+        setManagers(result);
+      });
   };
 
   const viewDetails = (id: string) => {
-    history.push(`companies/${id}`);
+    history.push(`managers/${id}`);
   };
 
   useEffect(() => {
-    const userJSON = window.localStorage.getItem('loggedUser');
-
-    if (userJSON) {
-      const user = JSON.parse(userJSON);
-      const token = user.token;
-
-      managersService.getAll(token).then((result: Manager[]) => {
-        setManagers(result);
-      });
-    }
+    managersService.getAll(token).then((result: Manager[]) => {
+      setManagers(result);
+    });
   }, []);
 
   return (

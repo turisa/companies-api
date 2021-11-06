@@ -4,22 +4,15 @@ import { useParams } from 'react-router';
 import Manager from '../../types/Manager';
 import managersService from '../../services/managers';
 
-const ManagerDetail = () => {
+const ManagerDetail = ({ token }: { token: string }) => {
   const [manager, setManager] = useState<Manager>();
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
-    const userJSON = window.localStorage.getItem('loggedUser');
-
-    if (userJSON) {
-      const user = JSON.parse(userJSON);
-      const token = user.token;
-
-      managersService.get(id, token).then((result: Manager) => {
-        console.log(manager);
-        setManager(result);
-      });
-    }
+    managersService.get(id, token).then((result: Manager) => {
+      console.log(manager);
+      setManager(result);
+    });
   }, []);
 
   return manager ? (

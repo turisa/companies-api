@@ -4,22 +4,15 @@ import { useParams } from 'react-router';
 import Job from '../../types/Job';
 import jobsService from '../../services/jobs';
 
-const JobDetail = () => {
+const JobDetail = ({ token }: { token: string }) => {
   const [job, setJob] = useState<Job>();
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
-    const userJSON = window.localStorage.getItem('loggedUser');
-
-    if (userJSON) {
-      const user = JSON.parse(userJSON);
-      const token = user.token;
-
-      jobsService.get(id, token).then((result: Job) => {
-        console.log(job);
-        setJob(result);
-      });
-    }
+    jobsService.get(id, token).then((result: Job) => {
+      console.log(job);
+      setJob(result);
+    });
   }, []);
 
   return job ? (

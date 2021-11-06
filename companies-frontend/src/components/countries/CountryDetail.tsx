@@ -4,23 +4,17 @@ import { useParams } from 'react-router';
 import Country from '../../types/Country';
 import countriesService from '../../services/countries';
 
-const CountryDetail = () => {
+const CountryDetail = ({ token }: { token: string }) => {
   const [country, setCountry] = useState<Country>();
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
-    const userJSON = window.localStorage.getItem('loggedUser');
-
-    if (userJSON) {
-      const user = JSON.parse(userJSON);
-      const token = user.token;
-
-      countriesService.get(id, token).then((result: Country) => {
-        console.log(country);
-        setCountry(result);
-      });
-    }
-  }, []);
+    console.log('abcd');
+    countriesService.get(id, token).then((result: Country) => {
+      console.log('id', id);
+      setCountry(result);
+    });
+  }, [id, token]);
 
   return country ? (
     <div className="flex w-screen justify-center">

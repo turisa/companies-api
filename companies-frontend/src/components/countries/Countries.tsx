@@ -5,40 +5,26 @@ import countriesService from '../../services/countries';
 import { useHistory } from 'react-router';
 import SearchBar from '../shared/SearchBar';
 
-const Countries = () => {
+const Countries = ({ token }: { token: string }) => {
   const [countries, setCountries] = useState<Country[]>([]);
   const history = useHistory();
 
   const searchCountries = (searchInput: string) => {
-    const userJSON = window.localStorage.getItem('loggedUser');
-
-    if (userJSON) {
-      const user = JSON.parse(userJSON);
-      const token = user.token;
-
-      countriesService
-        .getAll(token, { name: searchInput })
-        .then((result: Country[]) => {
-          setCountries(result);
-        });
-    }
+    countriesService
+      .getAll(token, { name: searchInput })
+      .then((result: Country[]) => {
+        setCountries(result);
+      });
   };
 
   const viewDetails = (id: string) => {
-    history.push(`companies/${id}`);
+    history.push(`countries/${id}`);
   };
 
   useEffect(() => {
-    const userJSON = window.localStorage.getItem('loggedUser');
-
-    if (userJSON) {
-      const user = JSON.parse(userJSON);
-      const token = user.token;
-
-      countriesService.getAll(token).then((result: Country[]) => {
-        setCountries(result);
-      });
-    }
+    countriesService.getAll(token).then((result: Country[]) => {
+      setCountries(result);
+    });
   }, []);
 
   return (

@@ -5,24 +5,17 @@ import Company from '../../types/Company';
 import companiesService from '../../services/companies';
 import SearchBar from '../shared/SearchBar';
 
-const Companies = () => {
+const Companies = ({ token }: { token: string }) => {
   const [companies, setCompanies] = useState<Company[]>([]);
 
   const history = useHistory();
 
   const searchCompanies = (searchInput: string) => {
-    const userJSON = window.localStorage.getItem('loggedUser');
-
-    if (userJSON) {
-      const user = JSON.parse(userJSON);
-      const token = user.token;
-
-      companiesService
-        .getAll(token, { name: searchInput })
-        .then((result: Company[]) => {
-          setCompanies(result);
-        });
-    }
+    companiesService
+      .getAll(token, { name: searchInput })
+      .then((result: Company[]) => {
+        setCompanies(result);
+      });
   };
 
   const viewDetails = (id: string) => {
@@ -30,16 +23,9 @@ const Companies = () => {
   };
 
   useEffect(() => {
-    const userJSON = window.localStorage.getItem('loggedUser');
-
-    if (userJSON) {
-      const user = JSON.parse(userJSON);
-      const token = user.token;
-
-      companiesService.getAll(token).then((result: Company[]) => {
-        setCompanies(result);
-      });
-    }
+    companiesService.getAll(token).then((result: Company[]) => {
+      setCompanies(result);
+    });
   }, []);
 
   return (
@@ -61,21 +47,7 @@ const Companies = () => {
           <div className="text-gray-400 text-sm">
             {company.jobs.length} jobs available
           </div>
-          <div className="flex items-center gap-x-1 text-  text-sm">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4 text-red-400"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                clipRule="evenodd"
-              />
-            </svg>
-            {company.country.name}
-          </div>
+          <div className="text-gray-400 text-sm">{company.country.name}</div>
         </div>
       ))}
     </div>

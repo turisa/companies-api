@@ -4,22 +4,15 @@ import { useParams } from 'react-router';
 import Company from '../../types/Company';
 import companiesService from '../../services/companies';
 
-const CompanyDetail = () => {
+const CompanyDetail = ({ token }: { token: string }) => {
   const [company, setCompany] = useState<Company | undefined>(undefined);
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
-    const userJSON = window.localStorage.getItem('loggedUser');
-
-    if (userJSON) {
-      const user = JSON.parse(userJSON);
-      const token = user.token;
-
-      companiesService.get(id, token).then((result: Company) => {
-        console.log(company);
-        setCompany(result);
-      });
-    }
+    companiesService.get(id, token).then((result: Company) => {
+      console.log(company);
+      setCompany(result);
+    });
   }, []);
 
   return company ? (

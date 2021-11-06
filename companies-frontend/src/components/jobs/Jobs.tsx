@@ -5,38 +5,24 @@ import jobsService from '../../services/jobs';
 import { useHistory } from 'react-router';
 import SearchBar from '.././shared/SearchBar';
 
-const Jobs = () => {
+const Jobs = ({ token }: { token: string }) => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const history = useHistory();
 
   const searchJobs = (searchInput: string) => {
-    const userJSON = window.localStorage.getItem('loggedUser');
-
-    if (userJSON) {
-      const user = JSON.parse(userJSON);
-      const token = user.token;
-
-      jobsService.getAll(token, { name: searchInput }).then((result: Job[]) => {
-        setJobs(result);
-      });
-    }
+    jobsService.getAll(token, { name: searchInput }).then((result: Job[]) => {
+      setJobs(result);
+    });
   };
 
   const viewDetails = (id: string) => {
-    history.push(`companies/${id}`);
+    history.push(`jobs/${id}`);
   };
 
   useEffect(() => {
-    const userJSON = window.localStorage.getItem('loggedUser');
-
-    if (userJSON) {
-      const user = JSON.parse(userJSON);
-      const token = user.token;
-
-      jobsService.getAll(token).then((result: Job[]) => {
-        setJobs(result);
-      });
-    }
+    jobsService.getAll(token).then((result: Job[]) => {
+      setJobs(result);
+    });
   }, []);
 
   return (
@@ -50,23 +36,7 @@ const Jobs = () => {
           key={job.id}
         >
           <h2 className="text-gray-500">{job.name}</h2>
-          <div className="flex items-center gap-x-2 text-gray-400 text-sm">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"
-              />
-            </svg>
-            {job.company.name}
-          </div>
+          <div className="text-gray-400 text-sm">{job.company.name}</div>
         </div>
       ))}
     </div>
