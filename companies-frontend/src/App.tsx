@@ -13,7 +13,7 @@ import ManagerDetail from './components/managers/ManagerDetail';
 import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
 
-function App() {
+const App = () => {
   return (
     <div className="bg-gray-100 sticky min-h-screen h-full w-screen">
       <Navbar />
@@ -54,6 +54,6 @@ function App() {
       </Switch>
     </div>
   );
-}
+};
 
 export default App;
