@@ -4,7 +4,11 @@ import { Link, useHistory } from 'react-router-dom';
 
 import loginService from '../services/login';
 
-const LoginForm = () => {
+const LoginForm = ({
+  setToken,
+}: {
+  setToken: React.Dispatch<React.SetStateAction<string | null>>;
+}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -17,9 +21,9 @@ const LoginForm = () => {
 
     try {
       const user = await loginService.login(credentials);
-      console.log(user);
 
-      window.localStorage.setItem('loggedUser', JSON.stringify(user));
+      setToken(user.token);
+      window.localStorage.setItem('loggedCompanyAPIUser', JSON.stringify(user));
 
       history.push('/');
     } catch (error) {
