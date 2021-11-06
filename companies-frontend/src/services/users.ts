@@ -11,8 +11,20 @@ const create = async (user: {
   return response.data;
 };
 
+const get = async (token: string, userId: string) => {
+  const config = {
+    headers: {
+      Authorization: `bearer ${token}`,
+    },
+  };
+
+  const response = await axios.get(`${baseUrl}/${userId}`, config);
+  return response.data;
+};
+
 const usersService = {
   create,
+  get,
 };
 
 export default usersService;
