@@ -1,6 +1,6 @@
 import { Link, useRouteMatch } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ token }: { token: string | null }) => {
   const links = [
     {
       to: '/companies',
@@ -31,22 +31,26 @@ const Navbar = () => {
           Companies API
         </span>
       </div>
-      <div className="w-full md:block flex-grow lg:flex lg:items-center lg:w-auto">
-        <div className="text-sm lg:flex-grow">
-          {links.map((link) => (
-            <Link key={link.to} to={link.to}>
-              <p
-                id="companies"
-                className={`block mt-4 lg:inline-block lg:mt-0 mr-4 ${
-                  link.match ? 'text-white' : 'text-indigo-200 hover:text-white'
-                }`}
-              >
-                {link.content}
-              </p>
-            </Link>
-          ))}
+      {token ? (
+        <div className="w-full md:block flex-grow lg:flex lg:items-center lg:w-auto">
+          <div className="text-sm lg:flex-grow">
+            {links.map((link) => (
+              <Link key={link.to} to={link.to}>
+                <p
+                  id="companies"
+                  className={`block mt-4 lg:inline-block lg:mt-0 mr-4 ${
+                    link.match
+                      ? 'text-white'
+                      : 'text-indigo-200 hover:text-white'
+                  }`}
+                >
+                  {link.content}
+                </p>
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
+      ) : null}
     </nav>
   );
 };
