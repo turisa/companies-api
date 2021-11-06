@@ -1,5 +1,7 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
 
+import { useEffect, useState } from 'react';
+
 import Companies from './components/companies/Companies';
 import Countries from './components/countries/Countries';
 import Jobs from './components/jobs/Jobs';
@@ -14,39 +16,56 @@ import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
 
 const App = () => {
+  const [token, setToken] = useState<string | null>(null);
+
+  if (!token) {
+    const loggedCompanyAPIUser = window.localStorage.getItem(
+      'loggedCompanyAPIUser'
+    );
+
+    if (loggedCompanyAPIUser) {
+      const user = JSON.parse(loggedCompanyAPIUser);
+      const token = user.token;
+
+      if (token) {
+        setToken(token);
+      }
+    }
+  }
+
   return (
     <div className="bg-gray-100 sticky min-h-screen h-full w-screen">
-      <Navbar />
+      <Navbar token={token} />
       <Switch>
         <Route path="/signup">
           <SignUpForm />
         </Route>
         <Route path="/login">
-          <LoginForm />
+          <LoginForm setToken={setToken} />
         </Route>
         <Route path="/companies/:id">
-          <CompanyDetail />
+          {token ? <CompanyDetail token={token} /> : <Redirect to="/login" />}
         </Route>
         <Route path="/countries/:id">
-          <CountryDetail />
+          {token ? <CountryDetail token={token} /> : <Redirect to="/login" />}
         </Route>
         <Route path="/jobs/:id">
-          <JobDetail />
+          {token ? <JobDetail token={token} /> : <Redirect to="/login" />}
         </Route>
         <Route path="/managers/:id">
-          <ManagerDetail />
+          {token ? <ManagerDetail token={token} /> : <Redirect to="/login" />}
         </Route>
         <Route path="/companies">
-          <Companies />
+          {token ? <Companies token={token} /> : <Redirect to="/login" />}
         </Route>
         <Route path="/countries">
-          <Countries />
+          {token ? <Countries token={token} /> : <Redirect to="/login" />}
         </Route>
         <Route path="/jobs">
-          <Jobs />
+          {token ? <Jobs token={token} /> : <Redirect to="/login" />}
         </Route>
         <Route path="/managers">
-          <Managers />
+          {token ? <Managers token={token} /> : <Redirect to="/login" />}
         </Route>
         <Route path="/">
           <Redirect to="/companies" />
