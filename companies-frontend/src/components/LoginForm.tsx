@@ -11,6 +11,7 @@ const LoginForm = ({
 }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const history = useHistory();
 
@@ -26,8 +27,15 @@ const LoginForm = ({
       window.localStorage.setItem('loggedCompanyAPIUser', JSON.stringify(user));
 
       history.push('/');
-    } catch (error) {
-      console.log(error); // todo
+    } catch (error: any) {
+      switch (error.message) {
+        case 'Request failed with status code 400':
+          setErrorMessage('Please fill out the required fields');
+          return;
+        case 'Request failed with status code 401':
+          setErrorMessage('Invalid username or password');
+      }
+      console.log(error.message); // todo
     }
   };
 
@@ -48,6 +56,11 @@ const LoginForm = ({
               Log in
             </p>
           </div>
+          {errorMessage ? (
+            <div className="flex flex-col justify-start mt-3">
+              <p className="text-sm text-red-700">{errorMessage}</p>
+            </div>
+          ) : null}
           <form className="flex flex-col mt-1" onSubmit={handleLogin}>
             <div className="flex flex-col mt-3 justify-start">
               <input
