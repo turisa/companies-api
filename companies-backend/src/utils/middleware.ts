@@ -12,7 +12,7 @@ morgan.token('body', (request: IncomingMessageWithBody) => {
 });
 
 export const requestLogger = morgan(
-  ':method :url :status :res[content-length] - :response-time ms :body'
+  ':method :url :status :res[content-length] - :response-time ms'
 );
 
 export const tokenVerifier = (
