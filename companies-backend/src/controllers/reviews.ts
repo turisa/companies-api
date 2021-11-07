@@ -34,48 +34,56 @@ reviewsRouter.post('/', async (request, response) => {
   response.status(201).json(result);
 });
 
-reviewsRouter.put('/:id', async (request, response) => {
+reviewsRouter.put('/:id', async (request, response, next) => {
   const reviewId = request.params.id;
   const userId = request.token.id;
 
-  const review = await Review.findById(reviewId);
+  try {
+    const review = await Review.findById(reviewId);
 
-  if (review.deleted) {
-    return response.status(404).end();
-  }
+    if (review.deleted) {
+      return response.status(404).end();
+    }
 
-  if (review.user.id.toString('hex') !== userId) {
-    return response.status(401).json({
-      error: 'User is not the owner',
-    });
-  }
-
-  const newContent: string = request.body.content;
-  review.content = newContent;
-
-  const result = await review.save();
-
-  response.status(200).json(result);
-});
-
-reviewsRouter.delete('/:id', async (request, response) => {
-  const reviewId = request.params.id;
-  const userId = request.token.id;
-
-  const review = await Review.findById(reviewId);
-
-  if (review)
     if (review.user.id.toString('hex') !== userId) {
-      console.log(review.user.id.toString('hex'), userId);
       return response.status(401).json({
         error: 'User is not the owner',
       });
     }
 
-  review.deleted = true;
-  await review.save();
+    const newContent: string = request.body.content;
+    review.content = newContent;
 
-  return response.status(204).end();
+    const result = await review.save();
+
+    response.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
+reviewsRouter.delete('/:id', async (request, response, next) => {
+  const reviewId = request.params.id;
+  const userId = request.token.id;
+
+  try {
+    const review = await Review.findById(reviewId);
+
+    if (review)
+      if (review.user.id.toString('hex') !== userId) {
+        console.log(review.user.id.toString('hex'), userId);
+        return response.status(401).json({
+          error: 'User is not the owner',
+        });
+      }
+
+    review.deleted = true;
+    await review.save();
+
+    return response.status(204).end();
+  } catch (error) {
+    next(error);
+  }
 });
 
 export default reviewsRouter;
