@@ -48,11 +48,12 @@ export const errorHandler = (
   response: express.Response,
   next: express.NextFunction
 ) => {
+  console.log(error);
+
   switch (error.name) {
     case 'CastError': // invalid id => cast to ObjectId fails => resource with id doesn't exist => 404
       return response.status(404).end();
   }
-  console.log(error.name); // for now
 
   response.status(500).end();
 };
