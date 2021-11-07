@@ -12,7 +12,7 @@ morgan.token('body', (request: IncomingMessageWithBody) => {
 });
 
 export const requestLogger = morgan(
-  ':method :url :status :res[content-length] - :response-time ms'
+  ':method :url :status :res[content-length] - :response-time ms :body'
 );
 
 export const tokenVerifier = (
@@ -48,7 +48,11 @@ export const errorHandler = (
   response: express.Response,
   next: express.NextFunction
 ) => {
-  console.log(error); // for now
+  switch (error.name) {
+    case 'CastError': // invalid id => cast to ObjectId fails => resource with id doesn't exist => 404
+      return response.status(404).end();
+  }
+  console.log(error.name); // for now
 
-  next(error);
+  response.status(500).end();
 };
