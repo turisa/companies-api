@@ -21,6 +21,7 @@ services:
       - mongo
     environment:
       WAIT_HOSTS: mongo:27017
+      SECRET: 392048uowfdlkjs973urkqjwafh89zih23fw89zrhuikj3nehd98i
       MONGODB_URL: mongodb://username:password@mongo:27017/database
       PORT: 4000
   app-frontend:
