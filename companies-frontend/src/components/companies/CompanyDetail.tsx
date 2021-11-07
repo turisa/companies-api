@@ -4,6 +4,7 @@ import { useParams } from 'react-router';
 import Company from '../../types/Company';
 import companiesService from '../../services/companies';
 import reviewsService from '../../services/reviews';
+import RestService from '../../services/restService';
 
 const CompanyDetail = ({ token }: { token: string }) => {
   const [company, setCompany] = useState<Company | undefined>(undefined);
@@ -39,12 +40,29 @@ const CompanyDetail = ({ token }: { token: string }) => {
     reviewsService.post(token, company!.id, review).then((result) => {
       setReview('');
 
-      const companyWithNewReview = {
+      const updatedReviews = company!.reviews.concat({
+        ...result,
+        user: result.user.id,
+      });
+
+      const updatedCompany = {
         ...company!,
-        reviews: company!.reviews.concat({ ...result, user: result.user.id }),
+        reviews: updatedReviews,
       };
 
-      setCompany(companyWithNewReview);
+      setCompany(updatedCompany);
+    });
+  };
+
+  const deleteReview = (id: string) => {
+    reviewsService.remove(token, id).then(() => {
+      const updatedReviews = company!.reviews.filter(
+        (review) => review.id !== id
+      );
+
+      const updatedCompany = { ...company!, reviews: updatedReviews };
+
+      setCompany(updatedCompany);
     });
   };
 
@@ -124,7 +142,10 @@ const CompanyDetail = ({ token }: { token: string }) => {
                 {console.log(userId, review)}
                 {userId === review.user ? (
                   <div className="float-right">
-                    <button className=" bg-red-400 text-white rounded-md px-1">
+                    <button
+                      onClick={() => deleteReview(review.id)}
+                      className=" bg-red-400 text-white rounded-md px-1"
+                    >
                       Delete
                     </button>
                   </div>
