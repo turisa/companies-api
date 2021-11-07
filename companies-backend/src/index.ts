@@ -1,8 +1,8 @@
 import http from 'http';
 import mongoose from 'mongoose';
 
-// import dotenv from 'dotenv';
-// dotenv.config();
+//import dotenv from 'dotenv'; // rm
+//dotenv.config(); // rm
 
 import app from './app';
 import { clearDb, populateDb } from './utils/db_helper';
