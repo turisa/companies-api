@@ -17,7 +17,7 @@ const ManagerDetail = ({ token }: { token: string }) => {
 
   return manager ? (
     <div className="flex w-screen justify-center">
-      <div className="w-2/4 mt-24 bg-white px-3 pt-3 pb-6 h-full">
+      <div className="w-2/4 bg-white px-3 pt-3 pb-6 h-full">
         <div className="flex justify-center">
           <div></div>
           <p className="text-xl text-gray-500 p-3">{manager.name}</p>

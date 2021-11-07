@@ -1,6 +1,15 @@
 import { Link, useRouteMatch } from 'react-router-dom';
+import { useHistory } from 'react-router';
 
-const Navbar = ({ token }: { token: string | null }) => {
+const Navbar = ({
+  token,
+  setToken,
+}: {
+  token: string | null;
+  setToken: React.Dispatch<React.SetStateAction<string | null>>;
+}) => {
+  const history = useHistory();
+
   const links = [
     {
       to: '/companies',
@@ -24,8 +33,13 @@ const Navbar = ({ token }: { token: string | null }) => {
     },
   ];
 
+  const logout = () => {
+    setToken(null);
+    window.localStorage.removeItem('loggedCompanyAPIUser');
+  };
+
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-indigo-500 p-6 shadow-lg fixed w-screen pl-48 pr-48">
+    <nav className="flex items-center justify-between flex-wrap bg-indigo-500 p-6 shadow-lg w-screen xl:pl-48 xl:pr-48">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
         <span className="font-semibold text-xl tracking-tight">
           Companies API
@@ -48,6 +62,14 @@ const Navbar = ({ token }: { token: string | null }) => {
                 </p>
               </Link>
             ))}
+          </div>
+          <div>
+            <button
+              onClick={logout}
+              className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white transition ease-linear duration-100 hover:border-transparent hover:text-teal-500 hover:bg-white hover:text-indigo-500 mt-4 lg:mt-0"
+            >
+              Log out
+            </button>
           </div>
         </div>
       ) : null}

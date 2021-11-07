@@ -26,7 +26,7 @@ const Jobs = ({ token }: { token: string }) => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-y-2 pt-24">
+    <div className="flex flex-col items-center gap-y-2 mt-3">
       <SearchBar onSubmit={searchJobs} />
 
       {jobs.map((job) => (

@@ -18,7 +18,7 @@ const CountryDetail = ({ token }: { token: string }) => {
 
   return country ? (
     <div className="flex w-screen justify-center">
-      <div className="w-2/4 mt-24 bg-white px-3 pt-3 pb-6 h-full">
+      <div className="w-2/4 mt-3 bg-white px-3 pt-3 pb-6 h-full">
         <div className="flex justify-center">
           <div></div>
           <p className="text-xl text-gray-500 p-3">{country.name}</p>
