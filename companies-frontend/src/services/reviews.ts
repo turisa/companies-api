@@ -33,9 +33,21 @@ const put = async (
   return response.data;
 };
 
+const remove = async (token: string, reviewId: string) => {
+  const config = {
+    headers: {
+      Authorization: `bearer ${token}`,
+    },
+  };
+
+  const response = await axios.delete(`${baseUrl}/${reviewId}`, config);
+  return response.data;
+};
+
 const reviewsService = {
   post,
   put,
+  remove,
 };
 
 export default reviewsService;
