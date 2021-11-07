@@ -25,12 +25,13 @@ reviewsRouter.post('/', async (request, response) => {
   review.company = company;
   review.user = user;
 
-  const result = await review.save();
+  const createdReview = await review.save();
+  const result = await createdReview.populate('user');
 
-  company.reviews = company.reviews.concat(result);
-  await company.save();
+  await Company.findByIdAndUpdate(companyId, { $push: { reviews: review } });
 
-  return response.status(201).json(result);
+  console.log(result);
+  response.status(201).json(result);
 });
 
 reviewsRouter.put('/:id', async (request, response) => {
