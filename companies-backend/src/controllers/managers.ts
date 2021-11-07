@@ -19,15 +19,19 @@ managersRouter.get('/', async (request, response) => {
   response.json(managers);
 });
 
-managersRouter.get('/:id', async (request, response) => {
+managersRouter.get('/:id', async (request, response, next) => {
   const id = request.params.id;
 
-  const managers = await Manager.findById(id).populate('companies', {
-    name: 1,
-    description: 1,
-  });
+  try {
+    const managers = await Manager.findById(id).populate('companies', {
+      name: 1,
+      description: 1,
+    });
 
-  response.json(managers);
+    response.json(managers);
+  } catch (error) {
+    next(error);
+  }
 });
 
 export default managersRouter;

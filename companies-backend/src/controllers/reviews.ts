@@ -66,6 +66,7 @@ reviewsRouter.delete('/:id', async (request, response) => {
 
   if (review)
     if (review.user.id.toString('hex') !== userId) {
+      console.log(review.user.id.toString('hex'), userId);
       return response.status(401).json({
         error: 'User is not the owner',
       });

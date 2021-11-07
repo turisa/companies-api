@@ -19,15 +19,19 @@ jobsRouter.get('/', async (request, response) => {
   response.json(jobs);
 });
 
-jobsRouter.get('/:id', async (request, response) => {
+jobsRouter.get('/:id', async (request, response, next) => {
   const id = request.params.id;
 
-  const job = await Job.findById(id).populate('company', {
-    name: 1,
-    description: 1,
-  });
+  try {
+    const job = await Job.findById(id).populate('company', {
+      name: 1,
+      description: 1,
+    });
 
-  response.json(job);
+    response.json(job);
+  } catch (error) {
+    next(error);
+  }
 });
 
 export default jobsRouter;

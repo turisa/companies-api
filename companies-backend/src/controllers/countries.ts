@@ -20,15 +20,19 @@ countriesRouter.get('/', async (request, response) => {
   response.json(countries);
 });
 
-countriesRouter.get('/:id', async (request, response) => {
+countriesRouter.get('/:id', async (request, response, next) => {
   const id = request.params.id;
 
-  const country = await Country.findById(id).populate('companies', {
-    name: 1,
-    description: 1,
-  });
+  try {
+    const country = await Country.findById(id).populate('companies', {
+      name: 1,
+      description: 1,
+    });
 
-  response.json(country);
+    response.json(country);
+  } catch (error) {
+    next(error);
+  }
 });
 
 export default countriesRouter;
