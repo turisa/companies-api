@@ -35,7 +35,7 @@ const App = () => {
 
   return (
     <div className="bg-gray-100 sticky min-h-screen h-full w-screen">
-      <Navbar token={token} />
+      <Navbar token={token} setToken={setToken} />
       <Switch>
         <Route path="/signup">
           <SignUpForm />
